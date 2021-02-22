@@ -1,0 +1,40 @@
+.container {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100vh;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.navigation {
+    margin: 0;
+    background-color:rgb(17, 17, 17);
+    height: 100vh;
+    padding: 0 3vw;
+}   
+
+.navigationHeader {
+    color: rgb(226, 226, 226);
+    margin-bottom: 10vh;
+    font-size: 3vh;
+}
+
+.navigation nav ul {
+    padding: 0;
+}
+
+.navigation nav ul li {
+    margin: 5vh 0;
+}
+
+.Links {
+    text-decoration: none;
+    color: rgb(129, 129, 129);
+    font-size: 2vh;
+}
+
+.navigationPages {
+    flex-grow: 3;
+}

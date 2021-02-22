@@ -1,0 +1,35 @@
+.container {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: rgb(233, 233, 233);
+  }
+
+.container p {
+    margin: 0;
+}
+
+.HomeHeader {
+    padding: 0;
+    display: flex;
+    margin: 0;
+    height: 10vh;
+    background-color: rgb(255, 255, 255);
+    color: rgb(26, 26, 26);
+    justify-content: center;
+    align-items: center;
+    font-size: 3vh;
+    font-weight: 500;
+}
+
+.AdressInfo p{
+    margin: 0;
+    padding: 4vh;
+    color: rgb(26, 26, 26);
+}
+
+.AdressInfo {
+    padding: 0;
+    border-bottom: 1px solid rgb(26, 26, 26);
+}
+

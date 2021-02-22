@@ -1,0 +1,10 @@
+.container {
+    margin: 0;
+    padding: 3vh 5vh 0 5vh;
+    height: 100vh;
+    background-color: pink;
+}
+
+.container p {
+    margin: 0;
+}
