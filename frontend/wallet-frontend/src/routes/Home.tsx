@@ -1,27 +1,36 @@
-import React, { useState } from 'react';
-import styles from '../styles/homepage.module.css';
+import React from 'react';
+import styles from '../styles/home.module.css';
+import { getPrivateKey } from '../helpers/seed';
 
-interface Adress {
-    info: string,
-  }
+interface HomeProps {
+    privateKey: string | null,
+    setPrivateKey: any,
+}
 
-export const Home = () => {
+export const Home = (props: HomeProps) => {
 
-    const [data, setData] = useState([{info: '414113g1v1cc1'}, {info: '3413413413413'}, {info: '0036169413413'}])
+    const { privateKey, setPrivateKey } = props;
 
-    const result = data.map((adress: Adress) => (
-                    <div className={styles.AdressInfo}>
-                        <p>{adress.info}</p>
-                    </div>
-                ))
+    const GenerateKey = () => {
+        const userKey: string = getPrivateKey();
+        localStorage.setItem('privateKey', userKey);
+        setPrivateKey(userKey);
+    }
 
     return (
         <React.Fragment>
             <div className={styles.container}>
-                <div>
-                    <p className={styles.HomeHeader}>Adresses</p>
+                <div className={styles.Key}>
+                    Your private key: { privateKey }
                 </div>
-                {result}
+                <div
+                    className={styles.Generate}
+                    role = 'button'
+                        onClick = {GenerateKey}
+                        onKeyPress = {() => {}}
+                        tabIndex = {0}>
+                    Generate
+                </div>
             </div>
         </React.Fragment>
         

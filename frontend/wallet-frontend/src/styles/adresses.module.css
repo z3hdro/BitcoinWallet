@@ -1,7 +1,6 @@
 .container {
     margin: 0;
     padding: 0;
-    height: 100vh;
     background-color: rgb(233, 233, 233);
   }
 
@@ -22,14 +21,14 @@
     font-weight: 500;
 }
 
-.AdressInfo p{
+.AdressLink{
     margin: 0;
-    padding: 4vh;
     color: rgb(26, 26, 26);
+    text-decoration: none;
 }
 
 .AdressInfo {
-    padding: 0;
+    padding: 4vh;
     border-bottom: 1px solid rgb(26, 26, 26);
 }
 
