@@ -6,7 +6,6 @@
     height: 100%;
     width: 100%;
     background-color:rgb(17, 17, 17);
-    flex-grow: 1;
 }
 
 .navigation {
@@ -38,3 +37,14 @@
 .navigationPages {
     flex-grow: 3;
 }
+
+@media screen and (max-width: 950px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+    }
+    .navigationHeader {
+        margin-bottom: 3vh;
+    }
+  }

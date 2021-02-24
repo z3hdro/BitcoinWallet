@@ -9,7 +9,7 @@ interface Adress {
 
 export const Adresses = () => {
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState<Adress[]>([])
 
     useEffect(() => {
         const result: any = localStorage.getItem('adresses');
@@ -26,7 +26,7 @@ export const Adresses = () => {
     }, [])
 
     const result = data.map((adress: Adress) => (
-                    <div className={styles.AdressInfo}>
+                    <div key={adress.info} className={styles.AdressInfo}>
                         <Link className={styles.AdressLink} to={`/transactions/:${adress.info}/`}>{adress.info}</Link>
                     </div>
                 ))

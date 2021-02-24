@@ -1,6 +1,7 @@
 .container {
     margin: 0;
     padding: 0;
+    width: 100vw;
     background-color: rgb(233, 233, 233);
   }
 
@@ -32,3 +33,15 @@
     border-bottom: 1px solid rgb(26, 26, 26);
 }
 
+@media screen and (max-width: 950px) {
+   .AdressLink {
+       font-size: 1.3vh;
+       word-wrap: break-word;
+       overflow-wrap: break-word;
+   }
+   .AdressInfo {
+    font-size: 1.3vh;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    }
+  }
