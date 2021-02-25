@@ -14,7 +14,7 @@ def random_char(y):
        return ''.join(random.choice(string.ascii_letters) for x in range(y))
 
 async def add_random_adresses(data):
-    for adr in data:
+    for adr in data['adresses']:
         query = (
             adresses_table.insert().values(adress=adr.info).returning(adresses_table.c.id)
         )

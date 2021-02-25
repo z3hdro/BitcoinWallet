@@ -4,11 +4,11 @@ export function getPrivateKey() {
     return faker.finance.account(25);
 }
 
-export function getAdresses() {
+export function getFakeAdresses() {
     let result = [];
-    const privateKey = localStorage.getItem('privateKey');
-    for (let i=0; i < 10; i++ ) {
-        result.push({info: faker.finance.bitcoinAddress()});
+    const max = Math.floor(Math.random() * Math.floor(11));
+    for (let i=0; i < max; i++ ) {
+        result.push({info: `${faker.finance.bitcoinAddress()}`});
     }
     return result;
 }
