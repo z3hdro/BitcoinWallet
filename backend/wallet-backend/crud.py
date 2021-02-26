@@ -44,9 +44,24 @@ async def create_adress(adress: str):
     query = (
         adresses_table.insert().values(adress=adress)
     )
-    await database.fetch_one(query)
+    Address = await database.fetch_one(query)
+    transactions_amount = random.randint(3, 5)
+    for i in range(transactions_amount):
+            transaction_query = (
+                transactions_table.insert()
+                .values(
+                        adress_id=list(Address.values())[0],
+                        time=datetime.now(),
+                        incoming_outgoing=random.randint(70, 220),
+                        sender_receiver=random_char(7)+"@gmail.com",
+                        amount=random.randint(1000, 1200),
+                        tax=random.randint(5, 100)
+                    )
+                )
+            
+            await database.fetch_one(transaction_query)
 
-    return {"Result": "adress created"}
+    return {"Result": "adress with fake transactions was created"}
 
 async def get_adresses():
     query = (
