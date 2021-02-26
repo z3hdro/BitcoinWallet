@@ -5,12 +5,8 @@ export function getPrivateKey() {
 }
 
 export function getFakeAdresses() {
-    let result = [];
-    const max = Math.floor(Math.random() * Math.floor(11));
-    for (let i=0; i < max; i++ ) {
-        result.push({info: `${faker.finance.bitcoinAddress()}`});
-    }
-    return result;
+    const max = Math.floor((Math.random() * 10) + 1);
+    return max;
 }
 
 // export function getTransactionDescription() {

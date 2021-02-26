@@ -39,9 +39,9 @@ async def shutdown():
 def read_root():
     return {"Hello": "World"}
 
-@app.post("/adresses/randomly/")
-async def add_random_adresses(data):
-    return await crud.add_random_adresses(data)
+@app.get("/adresses/randomly/{number}")
+async def add_random_adresses(number: int):
+    return await crud.add_random_adresses(number)
 
 @app.get("/adresses/")
 async def add_random_adresses():

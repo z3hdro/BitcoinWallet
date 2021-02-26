@@ -6,29 +6,25 @@ import { localhost, randomAdress, addAdress, adressesAll } from '../config';
 
 
 interface Adress {
-    info: string,
+    adress: string,
   }
 
 export const Adresses = () => {
 
-    const [data, setData] = useState<Adress[]>([{info: ''}])
+    const [data, setData] = useState<Adress[]>([{adress: ''}])
 
-    const addRandomAdresses = async (set: Adress[]) => {
-        const data: any = new FormData();
-        data.append("adresses", JSON.stringify(set));
-        await fetch(`${localhost}/${randomAdress}/`, {
-            method: "POST",
-            mode: "no-cors",
+    const addRandomAdresses = async (set: number) => {
+        await fetch(`${localhost}/${randomAdress}/${set}`, {
+            method: "GET",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
               },
-            body: data
         }).then(res => {
             return res.json();
         })
         .then(json => {
-            console.log(json.result)
+            console.log(json)
         })
         .catch((e) => console.log(e.message));
     };
@@ -43,11 +39,12 @@ export const Adresses = () => {
 			}
 		})
 			.then(res => {
+                // console.log(res.json());
                 return res.json();
 			})
 			.then(json => {
-                console.log(json.result)
-				setData(json.result);
+                console.log(json)
+				setData(json);
             })
             .catch((e) => console.log(e.message));
 	}, [])
@@ -56,20 +53,27 @@ export const Adresses = () => {
         const result: string | null = localStorage.getItem('adresses');
         const privateKey: string | null = localStorage.getItem('privateKey')
         if (privateKey !== null) {
-            if (result !== null && result !== undefined ) {
-                getAdresses();
-            } else {
-                const generatedAdresses: Adress[] = getFakeAdresses();
+            if (result === null || result === undefined ) {
+                const generatedAdresses: number = getFakeAdresses();
+                localStorage.setItem('adresses', JSON.stringify(generatedAdresses))
                 addRandomAdresses(generatedAdresses);
-                localStorage.setItem('adresses', JSON.stringify(generatedAdresses.length))
-                setData(generatedAdresses);
-            }
+            } 
         }
+    }, [])
+
+    useEffect(() => {
+        const result: string | null = localStorage.getItem('adresses');
+        const privateKey: string | null = localStorage.getItem('privateKey');
+        if (privateKey !== null) {
+            if (result !== null) {
+                getAdresses();
+            }
+        }       
     }, [getAdresses])
 
     const result = data.map((adress: Adress) => (
-                    <div key={adress.info} className={styles.AdressInfo}>
-                        <Link className={styles.AdressLink} to={`/transactions/:${adress.info}/`}>{adress.info}</Link>
+                    <div key={adress.adress} className={styles.AdressInfo}>
+                        <Link className={styles.AdressLink} to={`/transactions/:${adress.adress}/`}>{adress.adress}</Link>
                     </div>
                 ))
 

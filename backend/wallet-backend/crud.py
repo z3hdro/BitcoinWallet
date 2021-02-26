@@ -4,19 +4,21 @@ from models.transactions import transactions_table
 from models.adresses import adresses_table
 from sqlalchemy import desc, func, select
 from schemas import Adress
+from faker import Faker
 import random
 import string
 import os
 import hashlib
 
+faker = Faker()
 
 def random_char(y):
        return ''.join(random.choice(string.ascii_letters) for x in range(y))
 
-async def add_random_adresses(data):
-    for adr in data['adresses']:
+async def add_random_adresses(number: int):
+    for k in range(number):
         query = (
-            adresses_table.insert().values(adress=adr.info).returning(adresses_table.c.id)
+            adresses_table.insert().values(adress=f'{faker.md5()}').returning(adresses_table.c.id)
         )
         adress = await database.fetch_one(query)
 
@@ -25,7 +27,7 @@ async def add_random_adresses(data):
             transaction_query = (
                 transactions_table.insert()
                 .values(
-                        adress_id=adress.values()[0],
+                        adress_id=list(adress.values())[0],
                         time=datetime.now(),
                         incoming_outgoing=random.randint(70, 220),
                         sender_receiver=random_char(7)+"@gmail.com",
