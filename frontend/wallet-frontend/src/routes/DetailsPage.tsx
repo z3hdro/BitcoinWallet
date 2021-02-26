@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from '../styles/details.module.css';
 import { getTransactions } from '../helpers/seed';
+import { localhost, adressTransactions } from '../config';
 
 interface DetailsPageProps {
     readonly id?: string | null,
   }
+
+
 
 interface DetailsInfo {
     id: string,
@@ -18,29 +21,39 @@ interface DetailsInfo {
 export const DetailsPage = (props: DetailsPageProps) => {
     const { id }: DetailsPageProps  = props;
 
+    console.log('this is id prop: ', id);
+
     const [data, setData] = useState<DetailsInfo[]>([])
+
+    const getDetails = useCallback(() => {
+            fetch(`${localhost}/${id}/${adressTransactions}/`, {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+            }).then(res => {
+                return res.json();
+            })
+            .then(json => {
+                console.log(json)
+                setData(json)
+            })
+            .catch((e) => console.log(e.message));
+        }, []);
 
     useEffect(() => {
         const privateKey: string | null = localStorage.getItem('privateKey');
         if ((privateKey !== null) && (privateKey !== undefined)) {
-            const transactionsGenerated: string | null = localStorage.getItem('transactionsGenerated');
-            if ((transactionsGenerated !== null) && (transactionsGenerated !== undefined)) {
-                // console.log(result);
-                // setData(result);
-            } else {
-                const result: DetailsInfo[] = getTransactions();
-                localStorage.setItem('transactionsGenerated', 'true');
-                setData(result);
-            }
-            
+            getDetails()
         }
         
-    }, [])
+    }, [getDetails])
 
-    const res = data.map((transaction: DetailsInfo) => (
+    const res = data.length !== 0 ? data.map((transaction: DetailsInfo) => (
                     <div key={transaction.id} className={styles.transactionInfo}>
                         <div className={styles.transaction}>
-                            {transaction.time.toDateString()}
+                            {new Date(transaction.time).toDateString()}
                         </div>
                         <div className={styles.transaction}>
                             {transaction.incoming_outgoing}
@@ -55,7 +68,7 @@ export const DetailsPage = (props: DetailsPageProps) => {
                             {transaction.tax}
                         </div>
                     </div>
-                ))
+                )) : []
 
     return (
         <React.Fragment>

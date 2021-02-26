@@ -70,8 +70,9 @@ async def get_adress_transactions(adress: str):
         .select_from(adresses_table)
         .where(adresses_table.c.adress == adress)
     )
-    adress  = await database.fetch_one(query)
-     
+    Adress  = await database.fetch_one(query)
+
+
     transactions = (
         select(
             [
@@ -85,7 +86,7 @@ async def get_adress_transactions(adress: str):
             ]
         )
         .select_from(transactions_table)
-        .where(transactions_table.c.id == adress['id'])
+        .where(transactions_table.c.adress_id == list(Adress.values())[0])
         .order_by(desc(transactions_table.c.time))
     )
 
