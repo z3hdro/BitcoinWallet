@@ -45,3 +45,42 @@
     overflow-wrap: break-word;
     }
   }
+
+.btn_chat {
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    background: rgb(204, 169, 44);
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(204, 169, 44, 0.4);
+    animation: pulse 2s infinite;
+    position: fixed;
+    bottom: 4vh;
+    right: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 1s;
+}
+  
+.btn_chat:hover:focus {
+    background-color: rgb(255, 171, 21);
+    opacity: 0.75;
+}
+  
+@media (prefers-reduced-motion: reduce) {
+    .btn_chat {
+        animation: none;
+        transition: none;
+    }
+}
+  
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4); }
+    70% { box-shadow: 0 0 0 35px rgba(204, 169, 44, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(204, 169, 44, 0); }
+}
+
+.btn_chat img {
+    width: 60%;
+}

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from "react-router-dom";
 import styles from '../styles/adresses.module.css';
 import { getFakeAdresses } from '../helpers/seed';
-import { localhost, randomAdress, addAdress, adressesAll } from '../config';
+import { CreateInput } from '../components/CreateInput';
+import { localhost, randomAdress, adressesAll } from '../config';
 
 
 interface Adress {
@@ -10,7 +11,7 @@ interface Adress {
   }
 
 export const Adresses = () => {
-
+    const [toggle, setToggle] = useState(false);
     const [data, setData] = useState<Adress[]>([{adress: ''}])
 
     const addRandomAdresses = async (set: number) => {
@@ -77,6 +78,17 @@ export const Adresses = () => {
                     </div>
                 ))
 
+    const CreateButton = () => {
+        return (
+            <div className={styles.contact_list_button}>
+                <button type='button' className={styles.btn_chat} onClick={() => setToggle(!toggle)}>
+                    <img alt='新增会员' src='http://s1.iconbird.com/ico/0512/GlyphIcons/file1337170571.png'/>
+                </button>
+                {toggle ? <CreateInput setToggle={setToggle} fetchData={getAdresses}/> : null}
+            </div>
+        );
+    };
+
     return (
         <React.Fragment>
             <div className={styles.container}>
@@ -84,6 +96,7 @@ export const Adresses = () => {
                     <p className={styles.HomeHeader}>Adresses</p>
                 </div>
                 {result}
+                <CreateButton />
             </div>
         </React.Fragment>
         
