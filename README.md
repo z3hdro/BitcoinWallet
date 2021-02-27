@@ -26,7 +26,7 @@
 Для Windows
 ### `.\env\Scripts\activate`
 
-4. Переходим в корень проекта (cd api) и устанавливаем все зависимости из requirements.txt:
+4. Переходим в корень проекта (cd wallet-backed) и устанавливаем все зависимости из requirements.txt:
 ### `pip install -r requirements.txt`
    
 5. Далее, необходимо запустить docker и запустить контейнеры postgresql:
