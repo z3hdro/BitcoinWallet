@@ -55,11 +55,11 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from models import adresses, transactions
+from models import adresses, transactions // эту строку
 
 //.....
 
-target_metadata = [adresses.metadata, transactions.metadata]
+target_metadata = [adresses.metadata, transactions.metadata] // и эту строку
 ```
 8. Далее нужно сгенерировать миграции и обновить БД:
 ### `alembic revision --autogenerate -m "Added required tables"`
