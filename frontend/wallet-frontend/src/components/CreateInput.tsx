@@ -24,6 +24,8 @@ export function CreateInput(props: CreateInputProps) {
                 });
                 let answer = await response.json();
                 console.log(answer);
+                const num: any = localStorage.getItem('adresses');
+                localStorage.setItem('adresses', JSON.stringify(parseInt(num)+1))
                 fetchData();
                 setToggle(false);
             }

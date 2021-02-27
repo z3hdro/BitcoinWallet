@@ -58,19 +58,22 @@ export const Adresses = () => {
                 const generatedAdresses: number = getFakeAdresses();
                 localStorage.setItem('adresses', JSON.stringify(generatedAdresses))
                 addRandomAdresses(generatedAdresses);
-            } 
-        }
-    }, [])
-
-    useEffect(() => {
-        const result: string | null = localStorage.getItem('adresses');
-        const privateKey: string | null = localStorage.getItem('privateKey');
-        if (privateKey !== null) {
-            if (result !== null) {
-                getAdresses();
+                getAdresses()
+            } else {
+                getAdresses()
             }
-        }       
+        }
     }, [getAdresses])
+
+    // useEffect(() => {
+    //     const result: string | null = localStorage.getItem('adresses');
+    //     const privateKey: string | null = localStorage.getItem('privateKey');
+    //     if (privateKey !== null) {
+    //         if (result !== null) {
+    //             getAdresses();
+    //         }
+    //     }       
+    // }, [getAdresses])
 
     const result = data.map((adress: Adress) => (
                     <div key={adress.adress} className={styles.AdressInfo}>
@@ -82,7 +85,7 @@ export const Adresses = () => {
         return (
             <div className={styles.contact_list_button}>
                 <button type='button' className={styles.btn_chat} onClick={() => setToggle(!toggle)}>
-                    <img alt='新增会员' src='http://s1.iconbird.com/ico/0512/GlyphIcons/file1337170571.png'/>
+                    <img alt='add' src='http://s1.iconbird.com/ico/0512/GlyphIcons/file1337170571.png'/>
                 </button>
                 {toggle ? <CreateInput setToggle={setToggle} fetchData={getAdresses}/> : null}
             </div>
