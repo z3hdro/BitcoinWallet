@@ -8,7 +8,7 @@
 ## Установка
 
 1. Клонируем данный репозиторий на устройство:
-  ### `git clone https://github.com/z3hdro/API_request.git`
+  ### `git clone https://github.com/z3hdro/BitcoinWallet.git`
 
 2. Переходим в backend-часть проекта (cd BitcoinWallet\backend) и устанавливаем виртуальное окружение:
 
