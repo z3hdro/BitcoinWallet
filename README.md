@@ -44,14 +44,26 @@ SQLALCHEMY_DATABASE_URL = "postgresql://postgres:{preferable password}@localhost
 
 Далее открываем alembic.ini и вносим необходмые настройки:
 
-sqlalchemy.url = {значение SQLALCHEMY_DATABASE_URL из database.py без ""} 
-
 ```python
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:{preferable password}@localhost:{preferable port postgresql}/postgres"
+// в файле alembic.ini
+sqlalchemy.url = {значение SQLALCHEMY_DATABASE_URL из database.py без ""} 
+```
+
+в папке migrations открываем env.py и дописываем 
+```python
+from sqlalchemy import engine_from_config
+from sqlalchemy import pool
+
+from alembic import context
+from models import adresses, transactions
+
+//.....
+
+target_metadata = [adresses.metadata, transactions.metadata]
 ```
 8. Далее нужно сгенерировать миграции и обновить БД:
 ### `alembic revision --autogenerate -m "Added required tables"`
-### `alembic upgrade head"`
+### `alembic upgrade head`
 
 9. Запускаем из папки ..\BitcoinWallet\backend\wallet-backend сам проект:
   ### `uvicorn main:app --reload`
